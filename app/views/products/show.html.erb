@@ -1,10 +1,23 @@
-<h1><%= @product.name %></h1>
-<p><%= @product.description %></p>
-<h3><%= @product.price_per_day %> €</h3>
+<div class="row ">
+  <div class="col-4">
+    <div class="card rounded-4 shadow mt-3">
+      <div class="card-body d-flex flex-column" style="height: 520px;">
+        <% if @product.photo.attached? %>
+          <%= cl_image_tag @product.photo.key, class: 'card-img-top rounded-3' %>
+        <% else %>
+          <%= image_tag 'kite.jpg', class: 'card-img-top rounded-3' %>
+        <% end %>
+        <h2 class="card-title mt-3"><%= @product.name.capitalize %></h2>
+        <p class="cart-text d-inline-block text-truncate" style="max-width: 300px;"><%= @product.description %></p>
+        <p class="cart-text">prix : <%= @product.price_per_day %> par jour</p>
+        <h2>Proprietaire</h2>
+        <p><%= @owner.name %></p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h2>Proprietaire</h2>
-<p><%= @owner.name %></p>
-
+<br>
 <%= link_to 'back', root_path, class: 'btn btn-secondary'%>
 
 <% if user_signed_in? && current_user.id == @product.user_id%>
