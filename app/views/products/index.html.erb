@@ -10,7 +10,7 @@
           <% if product.photo.attached? %>
             <%= cl_image_tag product.photo.key, class: 'card-img-top rounded-3' %>
           <% else %>
-            <%= image_tag 'kite.jpg', class: 'card-img-top rounded-3' %>
+            <%= image_tag 'https://res.cloudinary.com/deewxzlno/image/upload/v1723576878/production/ff8xadzogussxwlwzpyk.jpg', class: 'card-img-top rounded-3' %>
           <% end %>
           <h2 class="card-title mt-3"><%= product.name.capitalize %></h2>
           <p class="cart-text d-inline-block text-truncate" style="max-width: 300px;"><%= product.description %></p>
