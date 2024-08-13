@@ -1,0 +1,13 @@
+<h1><%= @product.name %></h1>
+<p><%= @product.description %></p>
+<h3><%= @product.price_per_day %> €</h3>
+
+<h2>Proprietaire</h2>
+<p><%= @owner.name %></p>
+
+<%= link_to 'back', root_path, class: 'btn btn-secondary'%>
+
+<% if user_signed_in? && current_user.id == @product.user_id%>
+  <%= link_to 'Editer', edit_product_path, class: 'btn btn-primary' %>
+  <%= link_to 'Supprimer', product_path(@product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-warning' %>
+<% end %>

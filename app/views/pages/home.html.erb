@@ -1,2 +1,40 @@
 <h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<hr>
+
+<h2>Aperçu des produits</h2>
+
+<div class="row">
+  <% @products.first(3).each do |product| %>
+    <div class="col-md-4 card">
+      <div class="card-body">
+        <h2><%= product.name.capitalize %></h2>
+        <p><%= product.description %></p>
+        <p>Price: <%= product.price_per_day %> per day</p>
+        <%= link_to 'Voir ce produit', product_path(product.id), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<br>
+<div class="d-flex justify-content-end"><%= link_to 'Tous les produits', products_path, class: 'link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></div>
+<br>
+<br>
+<hr>
+
+<% if user_signed_in? %>
+  <h3>Bienvenue, <%= current_user.name %>!</h3>
+
+    <p>Voici vos produits :</p>
+    <% @products.each do |product| %>
+      <% if current_user.id == product.user_id %>
+        <div>
+          <%= link_to product.name, product_path(product), class: 'link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %>
+        </div>
+      <% end %>
+    <% end %>
+
+  <br>
+
+  <%= link_to 'Ajouter un produit', new_product_path, class: 'btn btn-secondary' %>
+<% end %>
