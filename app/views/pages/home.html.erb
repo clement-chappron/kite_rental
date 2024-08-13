@@ -1,2 +1,10 @@
 <h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+
+<%= link_to 'Products index', products_path %>
+<br>
+<br>
+
+<p>Bienvenue, <%= current_user.name %>!</p>
+<% if user_signed_in? %>
+<%= link_to 'New product', new_product_path %>
+<% end %>

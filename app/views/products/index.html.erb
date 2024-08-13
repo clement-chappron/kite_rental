@@ -1,0 +1,7 @@
+<h1>Products#index</h1>
+
+<ul>
+  <% @products.each do |product| %>
+    <li><%= link_to product.name, product_path(product.id) %></li>
+  <% end %>
+</ul>
