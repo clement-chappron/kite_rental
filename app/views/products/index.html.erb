@@ -2,20 +2,20 @@
   <h1>Tous les produits</h1>
 </div>
 
-<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+<div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-2 g-lg-3">
   <% @products.each do |product| %>
     <div class="col">
-      <div class="card rounded-4 shadow">
+      <div class="card rounded-4 shadow bg-light">
         <div class="card-body d-flex flex-column" style="height: 400px;">
           <% if product.photo.attached? %>
             <%= cl_image_tag product.photo.key, class: 'card-img-top rounded-3' %>
           <% else %>
             <%= image_tag 'https://res.cloudinary.com/deewxzlno/image/upload/v1723576878/production/ff8xadzogussxwlwzpyk.jpg', class: 'card-img-top rounded-3' %>
           <% end %>
-          <h2 class="card-title mt-3"><%= product.name.capitalize %></h2>
+          <h3 class="card-title mt-3"><%= product.name.capitalize %></h3>
           <p class="cart-text d-inline-block text-truncate" style="max-width: 300px;"><%= product.description %></p>
-          <p class="cart-text">Price: <%= product.price_per_day %> per day</p>
-          <%= link_to 'Voir ce produit', product_path(product.id), class: 'btn btn-primary mt-auto' %>
+          <p class="cart-text">Prix : <%= product.price_per_day %>€ par jour</p>
+          <%= link_to 'Voir ce produit', product_path(product.id), class: 'btn btn-primary mt-auto text-light' %>
         </div>
       </div>
     </div>

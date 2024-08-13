@@ -2,9 +2,23 @@
 
 // For example:
 $red: #FD1015;
-$blue: #0D6EFD;
+$blue: #04BFBF;
+$blue-secondary: #04ADBF;
+$blue-green: #027373;
+$sand: #F2E3D5;
+$sand-50: #f2e3d54f;
 $yellow: #FFC65A;
-$orange: #E67E22;
-$green: #1EDD88;
-$gray: #0E0000;
+$orange: #ed9f47;
+$green: #7EA629;
+$gray: #222222;
 $light-gray: #F4F4F4;
+
+h1 {
+  color: $blue-green !important;
+}
+h2 {
+  color: $gray !important;
+}
+h3, h4, h5, h6 {
+  color: $blue-secondary !important;
+}
