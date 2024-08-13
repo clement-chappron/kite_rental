@@ -12,4 +12,14 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :products
+
+    # User routes
+    # devise_scope :user do
+    #   authenticated :user do
+    #     root 'products#inex', as: :authenticated_root
+    #   end
+    #   unauthenticated do
+    #     root 'pages#home', as: :unauthenticated_root
+    #   end
+    # end
 end
