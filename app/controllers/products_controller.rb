@@ -1,12 +1,12 @@
 class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :find_product, only: [:show, :destroy]
 
   def index
     @products = Product.all
   end
 
   def show
-    @product = Product.find(params[:id])
     @owner = User.find(@product.user_id)
     @booking = Booking.new
   end
@@ -26,7 +26,16 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    @product.destroy
+    redirect_to products_path, status: :see_other
+  end
+
   private
+
+  def find_product
+    @product = Product.find(params[:id])
+  end
 
   def product_params
     params.require(:product).permit(:name, :description, :price_per_day)

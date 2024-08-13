@@ -5,4 +5,8 @@
 <h2>Proprietaire</h2>
 <p><%= @owner.name %></p>
 
-<%= link_to 'back', products_path %>
+<%= link_to 'back', products_path, class: 'btn btn-primary'%>
+
+<% if user_signed_in? && current_user.id == @product.user_id%>
+  <%= link_to 'Delete Product', product_path(@product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-warning' %>
+<% end %>

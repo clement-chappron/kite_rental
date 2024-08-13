@@ -4,7 +4,7 @@
 <br>
 <br>
 
-<p>Bienvenue, <%= current_user.name %>!</p>
 <% if user_signed_in? %>
-<%= link_to 'New product', new_product_path %>
+  <p>Bienvenue, <%= current_user.name %>!</p>
+  <%= link_to 'New product', new_product_path %>
 <% end %>
