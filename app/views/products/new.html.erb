@@ -1,23 +1,22 @@
 <h1>Créer un nouveau produit</h1>
 
-<%= form_for @product do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
+<%= simple_form_for @product do |f| %>
+  <div class="form-group">
+    <%= f.input :name, label: 'Product Name' %>
+  </div>
 
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </p>
+  <div class="form-group">
+    <%= f.input :description, as: :text, label: 'Description' %>
+  </div>
 
-  <p>
-    <%= f.label :price_per_day %><br>
-    <%= f.number_field :price_per_day %>
-  </p>
+  <div class="form-group">
+    <%= f.input :price_per_day, as: :numeric, label: 'Price per Day' %>
+  </div>
 
-  <p>
-    <%= f.submit %>
-  </p>
+  <div class="form-group">
+    <%= f.button :submit , class: 'btn btn-primary' %>
+  </div>
 
 <% end %>
+
+<%= link_to 'Back', root_path, class: 'mt-3 btn btn-secondary' %>

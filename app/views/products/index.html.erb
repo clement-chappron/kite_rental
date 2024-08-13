@@ -1,7 +1,17 @@
 <h1>Products#index</h1>
 
-<ul>
+<div class="row">
   <% @products.each do |product| %>
-    <li><%= link_to product.name, product_path(product.id) %></li>
+    <div class="col-md-4 card">
+      <div class="card-body">
+        <h2 class="card-title"><%= product.name.capitalize %></h2>
+        <p class="cart-text"><%= product.description %></p>
+        <p class="cart-text">Price: <%= product.price_per_day %> per day</p>
+        <%= link_to 'Voir ce produit', product_path(product.id), class: 'btn btn-primary' %>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>
+
+<br>
+<%= link_to 'Back', root_path, class: 'mt-3 btn btn-secondary' %>

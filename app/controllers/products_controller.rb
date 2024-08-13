@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :find_product, only: [:show, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   def index
     @products = Product.all
@@ -26,6 +26,17 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @product.update(product_params)
+      redirect_to @product, notice: 'Product was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @product.destroy
     redirect_to products_path, status: :see_other
@@ -33,7 +44,7 @@ class ProductsController < ApplicationController
 
   private
 
-  def find_product
+  def set_product
     @product = Product.find(params[:id])
   end
 
