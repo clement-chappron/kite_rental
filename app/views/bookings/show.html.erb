@@ -8,6 +8,7 @@
 </div>
 
 <div class="actions">
-  <%= link_to 'Edit', edit_user_booking_path(current_user, @booking) %> |
+  <%= link_to 'Edit', edit_user_booking_path(current_user, @booking) %>
+  <%= link_to 'Delete', user_booking_path(current_user, @booking), data: { turbo_method: :delete, confirm: 'Are you sure you want to delete this booking?' } %>
   <%= link_to 'Back', user_bookings_path(current_user) %>
 </div>
