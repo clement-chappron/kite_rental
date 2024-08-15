@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :products
+  resources :products do
+    resources :reviews, only: [:index]
+  end
+
 
     # User routes
     # devise_scope :user do
