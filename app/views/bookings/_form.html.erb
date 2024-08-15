@@ -1,0 +1,6 @@
+<%= simple_form_for booking do |f| %>
+  <%= f.association :product %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.button :submit %>
+<% end %>

@@ -1,0 +1,13 @@
+<h1>Booking Details</h1>
+
+<div class="booking-details">
+  <p><strong>Start Date:</strong> <%= @booking.start_date %></p>
+  <p><strong>End Date:</strong> <%= @booking.end_date %></p>
+  <p><strong>Product:</strong><%= @booking.product.name %></p>
+  <p><strong>Confirmed:</strong> <%= @booking.confirmed ? 'Confirmed' : 'Pending' %></p>
+</div>
+
+<div class="actions">
+  <%= link_to 'Edit', edit_product_booking_path(@booking) %> |
+  <%= link_to 'Back', product_bookings_path %>
+</div>

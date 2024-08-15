@@ -1,0 +1,32 @@
+<h1>My Bookings</h1>
+
+<% if @bookings.empty? %>
+  <p>You have no bookings.</p>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Product</th>
+        <th>Confirmed</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.start_date %></td>
+          <td><%= booking.end_date %></td>
+          <td><%= booking.product.name %></td>
+          <td><%= booking.confirmed ? 'Confirmed' : 'Pending' %></td>
+          <td>
+            <%= link_to 'Show', product_booking_path(booking) %>
+            <%= link_to 'Edit', edit_product_booking_path(booking) %>
+            <%= link_to 'Destroy', product_booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
