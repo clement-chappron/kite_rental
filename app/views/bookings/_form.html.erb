@@ -1,4 +1,5 @@
 <%= simple_form_for booking do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.association :product %>
   <%= f.input :start_date %>
   <%= f.input :end_date %>

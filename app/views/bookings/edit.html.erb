@@ -2,5 +2,5 @@
 
 <%= render 'form', booking: @booking %>
 
-<%= link_to 'Show', @booking %>
-<%= link_to 'Back',  product_bookings_path %>
+<%= link_to 'Show', user_booking_path(@booking.user, @booking) %>
+<%= link_to 'Back', user_bookings_path(@booking.user) %>

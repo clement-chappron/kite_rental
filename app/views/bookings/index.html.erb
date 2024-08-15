@@ -21,10 +21,7 @@
           <td><%= booking.product.name %></td>
           <td><%= booking.confirmed ? 'Confirmed' : 'Pending' %></td>
           <td>
-            <%= link_to 'Show', product_booking_path(booking) %>
-            <%= link_to 'Edit', edit_product_booking_path(booking) %>
-            <%= link_to 'Destroy', product_booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
+            <%= link_to 'Show', user_booking_path(current_user, booking) %>
         </tr>
       <% end %>
     </tbody>

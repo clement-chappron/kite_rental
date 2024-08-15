@@ -8,6 +8,6 @@
 </div>
 
 <div class="actions">
-  <%= link_to 'Edit', edit_product_booking_path(@booking) %> |
-  <%= link_to 'Back', product_bookings_path %>
+  <%= link_to 'Edit', edit_user_booking_path(current_user, @booking) %> |
+  <%= link_to 'Back', user_bookings_path(current_user) %>
 </div>
