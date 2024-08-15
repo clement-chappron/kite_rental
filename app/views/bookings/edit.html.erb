@@ -1,0 +1,6 @@
+<h1>Edit Booking</h1>
+
+<%= render 'form', booking: @booking %>
+
+<%= link_to 'Show', user_booking_path(@booking.user, @booking) %>
+<%= link_to 'Back', user_bookings_path(@booking.user) %>
