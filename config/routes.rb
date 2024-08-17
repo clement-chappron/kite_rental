@@ -25,4 +25,7 @@ Rails.application.routes.draw do
     #     root 'pages#home', as: :unauthenticated_root
     #   end
     # end
+  resources :users do
+    resources :bookings
+  end
 end
