@@ -12,23 +12,20 @@
             <%= link_to "Home", "/", class: "nav-link nav-link-kite" %>
           </li>
           <li class="nav-item me-3">
-            <%= link_to "Produits", products_path, class: "nav-link nav-link-kite" %>
+            <%= link_to "Tous les produits", products_path, class: "nav-link nav-link-kite" %>
           </li>
         <% if user_signed_in? %>
           <li class="nav-item me-3 dropdown nav-link-kite">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%# remplacer l'avatar par celui du User %>
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
+            <%= link_to current_user.name, '#', id: 'navbarDropdown', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown', bs_auto_close: 'outside' }, aria: { haspopup: 'true', expanded: 'false' } %>
             <div class="dropdown-menu dropdown-menu-end" style="background-color: white;" aria-labelledby="navbarDropdown">
-              <%# <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%# link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to 'Ajouter un produit', new_product_path, class: "dropdown-item" %>
+              <%= link_to "Mon compte", edit_user_registration_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
           <li class="nav-item me-3">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to "Login", new_user_session_path, class: "nav-link nav-link-kite" %>
           </li>
         <% end %>
       </ul>
