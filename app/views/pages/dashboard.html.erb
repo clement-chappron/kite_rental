@@ -37,6 +37,7 @@
         <% @products.each do |product| %>
           <li class="list-group-item">
             <%= link_to product.name, product_path(product) %>
+            <%= link_to '✖', product_path(product), method: :delete, data: { confirm: "Êtes-vous sûr(e) de vouloir supprimer ce produit ?" }, class: 'text-danger ms-3' %>
           </li>
         <% end %>
       </ul>
