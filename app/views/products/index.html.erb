@@ -15,7 +15,7 @@
           <h3 class="card-title mt-3"><%= product.name.capitalize %></h3>
           <p class="cart-text d-inline-block text-truncate" style="max-width: 300px;"><%= product.description %></p>
           <p class="cart-text">Prix : <%= product.price_per_day %>€ par jour</p>
-          <i class="fa-regular fa-star"></i>
+          <i class="fa-regular fa-star"></i><%=product.average_rating.present? ? product.average_rating.round(2) : "Not Rated" %>
           <%= link_to 'Voir ce produit', product_path(product.id), class: 'btn btn-primary mt-auto text-light' %>
         </div>
       </div>

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :products do
-    resources :reviews, only: [:index]
+    resources :reviews, only: [:create]
   end
 
 
