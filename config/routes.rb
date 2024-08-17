@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
+
   resources :products do
     resources :reviews, only: [:index]
   end
@@ -25,4 +26,8 @@ Rails.application.routes.draw do
     #     root 'pages#home', as: :unauthenticated_root
     #   end
     # end
+  
+  resources :users do
+    resources :bookings
+  end
 end

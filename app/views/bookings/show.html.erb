@@ -1,0 +1,15 @@
+<h1>Booking Details</h1>
+
+<div class="booking-details">
+  <p><strong>Start Date:</strong> <%= @booking.start_date %></p>
+  <p><strong>End Date:</strong> <%= @booking.end_date %></p>
+  <p><strong>Product:</strong><%= @booking.product.name %></p>
+  <p><strong>Confirmed:</strong> <%= @booking.confirmed ? 'Confirmed' : 'Pending' %></p>
+  <p><strong>Total Price:</strong><%= (@booking.total_price) %>€</p>
+</div>
+
+<div class="actions">
+  <%= link_to 'Edit', edit_user_booking_path(current_user, @booking) %>
+  <%= link_to 'Delete', user_booking_path(current_user, @booking), data: { turbo_method: :delete, confirm: 'Are you sure you want to delete this booking?' } %>
+  <%= link_to 'My Bookings', user_bookings_path(current_user) %>
+</div>
