@@ -9,7 +9,7 @@
         <% end %>
         <h3 class="card-title mt-3"><%= @product.name.capitalize %></h3>
         <p class="cart-text"><%= @product.description %></p>
-        <p class="cart-text">prix : <%= @product.price_per_day %>€ par jour</p>
+        <p class="cart-text">Prix : <%= @product.price_per_day %>€ par jour</p>
         <h4>Proprietaire</h4>
         <p><%= @owner.name %></p>
       </div>
@@ -18,7 +18,7 @@
 
 
 <br>
-<%= link_to 'back', root_path, class: 'btn btn-secondary'%>
+<%= link_to 'Back', root_path, class: 'btn btn-secondary'%>
 <% if user_signed_in?%>
   <%= link_to 'Réserver', new_user_booking_path(current_user, product_id: @product.id), class: 'btn btn-secondary' %>
 <% end %>
