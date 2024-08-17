@@ -4,6 +4,9 @@ Product.destroy_all
 puts 'All products destroyed'
 User.destroy_all
 puts 'All users destroyed'
+Review.destroy_all
+puts 'All reviews destroyed'
+
 
 # Seed Users
 
@@ -34,3 +37,12 @@ booking4 = Booking.create!(start_date: DateTime.now + 4.days, end_date: DateTime
 booking5 = Booking.create!(start_date: DateTime.now + 5.days, end_date: DateTime.now + 8.days, confirmed: false, product_id: product5.id, user_id: user5.id)
 
 puts '5 Bookings created'
+
+# Seed Reviews => to be checked with team
+rating1 = Review.create!(content: "Very efficient", rating: 4, user_id: user1.id, product_id: product1.id)
+rating2 = Review.create!(content: "Quite good", rating: 2, user_id: user2.id, product_id: product2.id)
+rating3 = Review.create!(content: "Good", rating: 1, user_id: user1.id, product_id: product3.id)
+rating4 = Review.create!(content: "Good", rating: 3, user_id: user2.id, product_id: product4.id)
+rating5 = Review.create!(content: "Superb", rating: 5, user_id: user2.id, product_id: product5.id)
+
+puts '5 Reviews created'
