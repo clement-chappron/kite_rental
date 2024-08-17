@@ -27,11 +27,10 @@
           <%= form.label :password_confirmation, "Confirmation du mot de passe" %>
           <%= form.password_field :password_confirmation, class: 'form-control' %>
         </div>
-        <%= form.submit "Mettre à jour le compte", class: 'btn btn-primary' %>
+        <%= form.submit "Mettre à jour le compte", class: 'btn btn-primary mt-3' %>
       <% end %>
     </div>
-    
-    <div class="col-md-6">
+      <div class="col-md-6">
       <h2>Produits</h2>
       <p>Vous avez <%= @products.count %> produit(s).</p>
       <ul class="list-group">
@@ -52,7 +51,7 @@
           <%= form.label :profile_picture, "Photo de profil" %>
           <%= form.file_field :profile_picture, class: 'form-control' %>
         </div>
-        <%= form.submit "Mettre à jour la photo", class: 'btn btn-primary' %>
+        <%= form.submit "Mettre à jour la photo", class: 'btn btn-primary mt-3' %>
       <% end %>
     </div>
   </div>
