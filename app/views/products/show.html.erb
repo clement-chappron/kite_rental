@@ -10,6 +10,7 @@
         <h3 class="card-title mt-3"><%= @product.name.capitalize %></h3>
         <p class="cart-text"><%= @product.description %></p>
         <p class="cart-text">prix : <%= @product.price_per_day %>€ par jour</p>
+        <p>⭐<%= @product.average_rating.present? ? product.average_rating.round(2) : "Not Rated"%></p>
         <h4>Proprietaire</h4>
         <p><%= @owner.name %></p>
       </div>
@@ -19,6 +20,9 @@
 
 <br>
 <%= link_to 'back', root_path, class: 'btn btn-secondary'%>
+<% if user_signed_in?%>
+  <%= link_to 'Réserver', new_user_booking_path(current_user, product_id: @product.id), class: 'btn btn-secondary' %>
+<% end %>
 
 <% if user_signed_in? && current_user.id == @product.user_id%>
   <%= link_to 'Editer', edit_product_path, class: 'btn btn-primary text-light' %>
@@ -26,8 +30,7 @@
 <% end %>
 
 
-<%= form_with(model: [ @product, Review.new ], local: true) do |form| %>
-  <%= form.label :rating, 'Rate this product' %>
-  <%= form.number_field :rating, in: 1..5 %>
-  <%= form.submit "Submit Review" %>
+<%= simple_form_for [@product, Review.new] do |f| %>
+  <%= f.input :rating, label: 'Rate this product', collection: 1..5, as: :select %>
+  <%= f.button :submit, 'Submit Review' %>
 <% end %>

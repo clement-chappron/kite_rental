@@ -2,13 +2,15 @@ class ReviewsController < ApplicationController
   before_action :set_product
 
   def create
-    @review = @product.reviews.build(review_params)
+    @review = @product.reviews.new(review_params)
+    @review.user = current_user
 
     if @review.save
       update_average_rating
       redirect_to @product, notice: 'Thank you for your review!'
     else
-      redirect_to @product, alert: 'There was an error submitting your review.'
+      flash[:alert] = 'There was an error submitting your review.'
+      redirect_to @product
     end
   end
 
