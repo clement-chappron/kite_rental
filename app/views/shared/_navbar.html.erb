@@ -1,13 +1,15 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid mx-5">
-    <%= link_to "kite rental", '/', class: "navbar-logo-font" %>
+    <%= link_to '/', class: 'navbar-brand' do %>
+      <%= image_tag "https://res.cloudinary.com/deewxzlno/image/upload/v1724066000/production/d9pusne6jecofevmrtrp.webp", alt: "Logo" %>
+    <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav me-auto align-items-center">
           <li class="nav-item me-3 active">
             <%= link_to "Home", "/", class: "nav-link nav-link-kite" %>
           </li>
@@ -16,7 +18,15 @@
           </li>
         <% if user_signed_in? %>
           <li class="nav-item me-3 dropdown nav-link-kite">
-            <%= link_to current_user.name, '#', id: 'navbarDropdown', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown', bs_auto_close: 'outside' }, aria: { haspopup: 'true', expanded: 'false' } %>
+            <%= link_to '#', id: 'navbarDropdown', class: 'nav-link dropdown-toggle' , data: { bs_toggle: 'dropdown', bs_auto_close: 'outside' }, aria: { haspopup: 'true', expanded: 'false' } do %>
+              <% if current_user.profile_picture.key? %>
+                <%= cl_image_tag current_user.profile_picture.key, class: 'rounded-circle', width: 40, height: 40, crop: :fill %>
+              <% elsif current_user.avatar? %>
+                <%= image_tag current_user.avatar, class: 'rounded-circle', width: 40, height: 40, crop: :thumb, gravity: :face %>
+              <% else %>
+                <%= current_user.name %>
+              <% end %>
+            <% end %>
             <div class="dropdown-menu dropdown-menu-end" style="background-color: white;" aria-labelledby="navbarDropdown">
               <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>
               <%= link_to 'Ajouter un produit', new_product_path, class: "dropdown-item" %>

@@ -8,7 +8,7 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  height: 60px;
 }
 
 .navbar-logo-font {
@@ -23,11 +23,15 @@
 }
 
 .nav-link-kite {
-  font-family: "Archivo Black", sans-serif;
+  font-family: "Montserrat", "Archivo Black", sans-serif;
   color: #04BFBF;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 18px;
   &:hover {
     color: #04ADBF;
   }
+}
+
+.dropdown-toggle::after {
+  display: none;
 }
