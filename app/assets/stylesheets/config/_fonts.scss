@@ -4,8 +4,13 @@
 
 // Define fonts for body and headers
 $body-font: "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Archivo Black", "Nunito", "Helvetica", "sans-serif";
-$headers-color: grey
+$headers-font: "Montserrat", "Nunito", "Helvetica", "sans-serif";
+$headers-color: grey;
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
