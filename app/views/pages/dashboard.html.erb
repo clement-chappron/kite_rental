@@ -2,7 +2,7 @@
 
 <div class="container">
   <h1>Bonjour, <%= @user.name %>!</h1>
-  
+
   <div class="row mb-4">
     <div class="col-md-6">
       <h2>Informations de Compte</h2>
@@ -27,7 +27,7 @@
           <%= form.label :password_confirmation, "Confirmation du mot de passe" %>
           <%= form.password_field :password_confirmation, class: 'form-control' %>
         </div>
-        <%= form.submit "Mettre à jour le compte", class: 'btn btn-primary mt-3' %>
+        <%= form.submit "Mettre à jour le compte", class: 'btn btn-primary text-light mt-3' %>
       <% end %>
     </div>
       <div class="col-md-6">
@@ -37,13 +37,16 @@
         <% @products.each do |product| %>
           <li class="list-group-item">
             <%= link_to product.name, product_path(product) %>
-            <%= link_to '✖', product_path(product), method: :delete, data: { confirm: "Êtes-vous sûr(e) de vouloir supprimer ce produit ?" }, class: 'text-danger ms-3' %>
+            <%= link_to product_path(product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'ms-3' do  %>
+              <i class="fas fa-trash text-danger"></i>
+            <% end %>
+            <%# link_to '✖', product_path(product), method: :delete, data: { confirm: "Êtes-vous sûr(e) de vouloir supprimer ce produit ?" }, class: 'text-danger ms-3' %>
           </li>
         <% end %>
       </ul>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-md-12">
       <h2>Ajouter une Photo de Profil</h2>
@@ -52,7 +55,7 @@
           <%= form.label :profile_picture, "Photo de profil" %>
           <%= form.file_field :profile_picture, class: 'form-control' %>
         </div>
-        <%= form.submit "Mettre à jour la photo", class: 'btn btn-primary mt-3' %>
+        <%= form.submit "Mettre à jour la photo", class: 'btn btn-primary text-light mt-3' %>
       <% end %>
     </div>
   </div>
