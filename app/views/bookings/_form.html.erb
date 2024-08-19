@@ -2,7 +2,7 @@
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :product_id, value: @booking.product_id %>
   <%# f.association :product %>
-  <%= f.input :start_date, as: :string, input_html: { class: 'datepicker', min: Date.today.to_s}%>
-  <%= f.input :end_date, as: :string, input_html: { class: 'datepicker', min: Date.today.to_s} %>
-  <%= f.button :submit, class: 'btn btn-primary text-light mb-3' %>
+  <%= f.input :start_date, label: "Date de début", as: :string, input_html: { class: 'datepicker', min: Date.today.to_s}%>
+  <%= f.input :end_date, label: "Date de fin", as: :string, input_html: { class: 'datepicker', min: Date.today.to_s} %>
+  <%= f.button :submit, "Réserver", class: 'btn btn-primary text-light mb-3' %>
 <% end %>
