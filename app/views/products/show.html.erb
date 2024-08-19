@@ -8,8 +8,9 @@
           <%= image_tag 'https://res.cloudinary.com/deewxzlno/image/upload/v1723576878/production/ff8xadzogussxwlwzpyk.jpg', class: 'card-img-top rounded-3' %>
         <% end %>
         <h3 class="card-title mt-3"><%= @product.name.capitalize %></h3>
-        <p class="cart-text"><%= @product.description %></p>
-        <p class="cart-text">Prix : <%= @product.price_per_day %>€ par jour</p>
+        <p class="card-text"><%= @product.description %></p>
+        <p class="card-text">prix : <%= @product.price_per_day %>€ par jour</p>
+        <p>⭐<%= @product.average_rating.present? ? product.average_rating.round(2) : "Not Rated"%></p>
         <h4>Proprietaire</h4>
         <p><%= @owner.name %></p>
       </div>
@@ -26,4 +27,10 @@
 <% if user_signed_in? && current_user.id == @product.user_id%>
   <%= link_to 'Editer', edit_product_path, class: 'btn btn-primary text-light' %>
   <%= link_to 'Supprimer', product_path(@product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-warning text-light' %>
+<% end %>
+
+
+<%= simple_form_for [@product, Review.new] do |f| %>
+  <%= f.input :rating, label: 'Rate this product', collection: 1..5, as: :select %>
+  <%= f.button :submit, 'Submit Review' %>
 <% end %>
