@@ -44,4 +44,27 @@
       <% end %>
     </div>
   </div>
+
+  <!-- Conteneur de la carte -->
+  <div id="map" style="height: 400px; width: 100%;"></div>
+
+  <!-- Script pour initialiser la carte -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Assurez-vous que vous avez une clé API Mapbox
+      mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+      
+      var map = new mapboxgl.Map({
+        container: 'map', // ID du conteneur
+        style: 'mapbox://styles/mapbox/streets-v11', // Style de la carte
+        center: [<%= @product.longitude %>, <%= @product.latitude %>], // Position initiale [longitude, latitude]
+        zoom: 14 // Niveau de zoom
+      });
+
+      // Ajout d'un marqueur
+      new mapboxgl.Marker()
+        .setLngLat([<%= @product.longitude %>, <%= @product.latitude %>])
+        .addTo(map);
+    });
+  </script>
 </div>
