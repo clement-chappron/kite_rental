@@ -1,0 +1,11 @@
+.footer {
+
+  font-weight: 100 !important;
+  a {
+    color: white;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
