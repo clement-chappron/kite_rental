@@ -16,8 +16,13 @@
             <h3 class="card-title mt-3 d-inline-block text-truncate" style="max-width: 300px;"><%= product.name.capitalize %></h3>
             <p class="cart-text d-inline-block text-truncate" style="max-width: 300px;"><%= product.description %></p>
             <p class="cart-text">Prix : <%= product.price_per_day %>€ par jour</p>
-            <p>⭐ <%= product.average_rating.present? ? product.average_rating.round(2) : "Ce produit n'a pas encore de note" %></p>
-
+            <p>
+              <% if product.reviews.any? %>
+                <%= product.reviews.average(:rating).to_f %> ⭐
+              <% else %>
+                "Ce produit n'a pas encore de note"
+              <% end %>
+            </p>
             <%= link_to 'Voir ce produit', product_path(product.id), class: 'btn btn-primary mt-auto text-light' %>
           </div>
         </div>
