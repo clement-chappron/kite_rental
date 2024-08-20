@@ -1,55 +1,63 @@
+<%# banner %>
 
-
-<div class="mt-4 mb-3">
-  <h1>Location de kitesurf à l'ile Maurice</h1>
+<div class="banner-home">
+  <div class="container">
+    <h1 class="px-5">
+      <span data-controller="typed", data-typed-sentences-value="<%= ["Bienvenue au paridis", "Louez votre kite n'importe où à l'ile Maurice", "Avec kite rental,", "Location de matériel pour le kitesurf <br> entre particuliers"] %>"></span>
+    </h1>
+  </div>
 </div>
 
-<h2 class="my-3">Aperçu des produits</h2>
+<%# Aperçu des produits %>
 
-<div class="row row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-md-2 g-lg-4">
-  <% @products.sample(3).each do |product| %>
-  <div class="col">
-      <div class="card rounded-4 shadow bg-light">
-        <div class="card-body d-flex flex-column" style="height: 520px;">
-          <% if product.photo.attached? %>
-            <%= cl_image_tag product.photo.key, class: 'card-img-top rounded-3' %>
-          <% else %>
-            <%= image_tag product.image, class: 'card-img-top rounded-3' %>
-          <% end %>
-          <h3 class="card-title mt-3"><%= product.name.capitalize %></h3>
-          <p class="cart-text d-inline-block text-truncate" style="max-width: 300px;"><%= product.description %></p>
-          <p class="cart-text">Prix : <%= product.price_per_day %>€ par jour</p>
-          <p>⭐ <%= product.average_rating.present? ? product.average_rating.round(2) : "Ce produit n'a pas encore de note" %></p>
-          <%= link_to 'Voir ce produit', product_path(product.id), class: 'btn btn-primary mt-auto text-light' %>
+<div class="container">
+  <h2 class="my-4">Aperçu des produits</h2>
+
+  <div class="row row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-md-2 g-lg-4">
+    <% @products.sample(3).each do |product| %>
+    <div class="col">
+        <div class="card rounded-4 shadow bg-light">
+          <div class="card-body d-flex flex-column" style="height: 520px;">
+            <% if product.photo.attached? %>
+              <%= cl_image_tag product.photo.key, class: 'card-img-top rounded-3' %>
+            <% else %>
+              <%= image_tag product.image, class: 'card-img-top rounded-3' %>
+            <% end %>
+            <h3 class="card-title mt-3"><%= product.name.capitalize %></h3>
+            <p class="cart-text d-inline-block text-truncate" style="max-width: 300px;"><%= product.description %></p>
+            <p class="cart-text">Prix : <%= product.price_per_day %>€ par jour</p>
+            <p>⭐ <%= product.average_rating.present? ? product.average_rating.round(2) : "Ce produit n'a pas encore de note" %></p>
+            <%= link_to 'Voir ce produit', product_path(product.id), class: 'btn btn-primary mt-auto text-light' %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 
-<br>
-<div class="d-flex justify-content-end"><%= link_to 'Tous les produits', products_path, class: 'link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></div>
-<br>
-<br>
-<hr>
+  <br>
+  <div class="d-flex justify-content-end"><%= link_to 'Tous les produits', products_path, class: 'link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></div>
+  <br>
+  <br>
+  <hr>
 
-<% if user_signed_in? %>
-  <h5 class="mt-3">Bienvenue, <%= current_user.name %>!</h5>
+  <% if user_signed_in? %>
+    <h5 class="mt-3">Bienvenue, <%= current_user.name %>!</h5>
 
-  <% if current_user.products.any? %>
-    <p>Voici vos produits :</p>
-    <div class="row row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-md-2 g-lg-4">
-      <% @products.each do |product| %>
-        <% if current_user.id == product.user_id %>
-            <div class=""><%= link_to product.name, product_path(product), class: 'link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></div>
+    <% if current_user.products.any? %>
+      <p>Voici vos produits :</p>
+      <div class="row row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-md-2 g-lg-4">
+        <% @products.each do |product| %>
+          <% if current_user.id == product.user_id %>
+              <div class=""><%= link_to product.name, product_path(product), class: 'link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' %></div>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-  <% else %>
-    <p>Vous n'avez pas encore ajouté de produits.</p>
+      </div>
+    <% else %>
+      <p>Vous n'avez pas encore ajouté de produits.</p>
+    <% end %>
+    <%= link_to 'Ajouter un produit', new_product_path, class: 'btn btn-secondary mt-3' %>
   <% end %>
-  <%= link_to 'Ajouter un produit', new_product_path, class: 'btn btn-secondary mt-3' %>
-<% end %>
 
-<br>
-<br>
+  <br>
+  <br>
+</div>
