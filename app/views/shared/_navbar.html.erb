@@ -21,8 +21,8 @@
             <%= link_to '#', id: 'navbarDropdown', class: 'nav-link dropdown-toggle' , data: { bs_toggle: 'dropdown', bs_auto_close: 'outside' }, aria: { haspopup: 'true', expanded: 'false' } do %>
               <% if current_user.profile_picture.key? %>
                 <%= cl_image_tag current_user.profile_picture.key, class: 'rounded-circle', width: 40, height: 40, crop: :fill %>
-              <% elsif current_user.avatar? %>
-                <%= image_tag current_user.avatar, class: 'rounded-circle', width: 40, height: 40, crop: :thumb, gravity: :face %>
+              <% elsif %>
+                <i class="fa-solid fa-user-ninja"></i>
               <% else %>
                 <%= current_user.name %>
               <% end %>
