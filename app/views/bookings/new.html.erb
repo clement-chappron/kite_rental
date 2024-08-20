@@ -1,7 +1,9 @@
-<h1>Nouvelle réservation</h1>
+<div class="container">
+  <h1>Nouvelle réservation</h1>
 
-<h3><%= @product.name %></h3>
-<h3><%= @product.price_per_day %>€</h3>
+  <h3><%= @product.name %></h3>
+  <h3><%= @product.price_per_day %>€</h3>
 
-<%= render 'form', booking: @booking %>
-<%= link_to 'Retour', product_path(@product)%>
+  <%= render 'form', booking: @booking %>
+  <%= link_to 'Retour', product_path(@product)%>
+</div>
