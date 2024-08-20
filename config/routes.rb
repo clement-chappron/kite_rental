@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'products/index'
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -11,9 +10,6 @@ Rails.application.routes.draw do
   # Dashboard et mise à jour du profil
   get 'dashboard', to: 'pages#dashboard'
   patch 'update_profile_picture', to: 'pages#update_profile_picture'
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 
   resources :products do
     resources :reviews, only: [:create]

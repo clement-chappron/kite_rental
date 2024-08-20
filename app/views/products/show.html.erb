@@ -43,7 +43,13 @@
   </div>
 
   <div class="col-sm-6 col-md-4 align-self-center">
-    <%= render partial: 'bookings/form', locals: { product: @product } %>
+    <h5 class="">Réserver ce produit</h5>
+    <% if user_signed_in? %>
+      <%= render partial: 'bookings/form', locals: { product: @product } %>
+    <% else %>
+      <p>Vous devez être connecté pour réserver un produit.</p>
+      <%= link_to 'Se connecter', new_user_session_path, class: 'mb-3 btn btn-primary text-light' %>
+    <% end %>
   </div>
 
   <div class="col-sm-6 col-md-4 align-self-center">
@@ -54,16 +60,16 @@
       <%= f.button :submit, 'Valider', class: 'btn btn-primary text-light' %>
     <% end %>
   </div>
-
-  <!-- Conteneur de la carte -->
+  <!--
+   <%# Conteneur de la carte %>
   <div id="map" style="height: 400px; width: 100%;"></div>
 
-  <!-- Script pour initialiser la carte -->
+   <%# Script pour initialiser la carte %>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Assurez-vous que vous avez une clé API Mapbox
       mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
-      
+
       var map = new mapboxgl.Map({
         container: 'map', // ID du conteneur
         style: 'mapbox://styles/mapbox/streets-v11', // Style de la carte
@@ -76,5 +82,5 @@
         .setLngLat([<%= @product.longitude %>, <%= @product.latitude %>])
         .addTo(map);
     });
-  </script>
+  </script> -->
 </div>

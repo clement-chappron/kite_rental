@@ -5,8 +5,9 @@ class Product < ApplicationRecord
 
   has_one_attached :photo
 
-  geocoded_by :address
-  after_validation :geocode, if: :will_save_change_to_address?
+  # geocoded_by :address
+  # after_validation :geocode, if: :will_save_change_to_address?
 
-  validates :name, :address, presence: true
+  validates :name, presence: true
+  # validates :name, :address, presence: true
 end
