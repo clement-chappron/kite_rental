@@ -32,7 +32,11 @@
   </div>
 
   <div class="col-sm-6 col-md-4 align-self-center">
-    <h5 class="">Ajouter un commentaires</h5>
+    <%= render partial: 'bookings/form', locals: { product: @product } %>
+  </div>
+
+  <div class="col-sm-6 col-md-4 align-self-center">
+    <h5 class="">Ajouter un commentaire</h5>
     <%= simple_form_for [@product, Review.new] do |f| %>
       <%= f.input :rating, label: 'Note', collection: 1..5, as: :select %>
       <%= f.input :content, label: 'Commentaire', input_html: { rows: 3 } %>
