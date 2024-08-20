@@ -34,6 +34,7 @@
         <% end %>
       </div>
     </div>
+<<<<<<< HEAD
 
 <<<<<<< HEAD
     <div class="col-sm-6 col-md-4 align-self-center">
@@ -45,6 +46,8 @@
       <% end %>
     </div>
 =======
+=======
+>>>>>>> 0ea7d5baaa4be76d4b0e0869e60c6f51696e6a2f
   </div>
 
   <div class="col-sm-6 col-md-4 align-self-center">
@@ -58,6 +61,32 @@
       <%= f.input :content, label: 'Commentaire', input_html: { rows: 3 } %>
       <%= f.button :submit, 'Valider', class: 'btn btn-primary text-light' %>
     <% end %>
+<<<<<<< HEAD
 >>>>>>> 627934880df8025693b335b50bfa3f82090b1d3c
+=======
+>>>>>>> 0ea7d5baaa4be76d4b0e0869e60c6f51696e6a2f
   </div>
+
+  <!-- Conteneur de la carte -->
+  <div id="map" style="height: 400px; width: 100%;"></div>
+
+  <!-- Script pour initialiser la carte -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Assurez-vous que vous avez une clé API Mapbox
+      mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+      
+      var map = new mapboxgl.Map({
+        container: 'map', // ID du conteneur
+        style: 'mapbox://styles/mapbox/streets-v11', // Style de la carte
+        center: [<%= @product.longitude %>, <%= @product.latitude %>], // Position initiale [longitude, latitude]
+        zoom: 14 // Niveau de zoom
+      });
+
+      // Ajout d'un marqueur
+      new mapboxgl.Marker()
+        .setLngLat([<%= @product.longitude %>, <%= @product.latitude %>])
+        .addTo(map);
+    });
+  </script>
 </div>
