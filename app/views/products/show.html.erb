@@ -15,6 +15,7 @@
           <p>⭐ <%= @product.average_rating.present? ? @product.average_rating.round(2) : "Ce produit n'a pas encore de note"%></p>
           <h4>Proprietaire</h4>
           <p><%= @owner.name %></p>
+          <p class="card-text">Adresse : <%= @product.address %></p> <!-- Ajout de l'adresse -->
         </div>
       </div>
 
@@ -35,7 +36,7 @@
     </div>
 
     <div class="col-sm-6 col-md-4 align-self-center">
-      <h5 class="">Ajouter un commentaires</h5>
+      <h5 class="">Ajouter un commentaire</h5>
       <%= simple_form_for [@product, Review.new] do |f| %>
         <%= f.input :rating, label: 'Note', collection: 1..5, as: :select %>
         <%= f.input :content, label: 'Commentaire', input_html: { rows: 3 } %>
