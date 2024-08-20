@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
 
   def show
     @owner = User.find(@product.user_id)
-    @booking = Booking.new
+    @booking = Booking.new(product: @product, user: current_user)
   end
 
   def new
