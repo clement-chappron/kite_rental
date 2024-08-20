@@ -4,6 +4,16 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+
+    # Le champ d'application `geocoded` ne filtre que les produits avec des coordonnées
+    @markers = @products.geocoded.map do |product|
+      {
+        lat: product.latitude,
+        lng: product.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {product: product}),
+        marker_html: render_to_string(partial: "marker")
+      }
+    end
   end
 
   def show
@@ -49,6 +59,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price_per_day, :photo)
+    params.require(:product).permit(:name, :description, :price_per_day, :photo, :address)
   end
 end
