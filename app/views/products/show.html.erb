@@ -12,7 +12,13 @@
           <h3 class="card-title mt-3"><%= @product.name.capitalize %></h3>
           <p class="card-text"><%= @product.description %></p>
           <p class="card-text">prix : <%= @product.price_per_day %>€ par jour</p>
-          <p>⭐ <%= @product.average_rating.present? ? @product.average_rating.round(2) : "Ce produit n'a pas encore de note"%></p>
+          <p>
+            <% if @product.reviews.any? %>
+              <%= @product.reviews.average(:rating).to_f %> ⭐
+            <% else %>
+              "Ce produit n'a pas encore de note"
+            <% end %>
+          </p>
           <h4>Proprietaire</h4>
           <p><%= @owner.name %></p>
         </div>
