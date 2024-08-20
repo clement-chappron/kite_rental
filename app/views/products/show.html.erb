@@ -15,6 +15,7 @@
           <p>⭐ <%= @product.average_rating.present? ? @product.average_rating.round(2) : "Ce produit n'a pas encore de note"%></p>
           <h4>Proprietaire</h4>
           <p><%= @owner.name %></p>
+          <p class="card-text">Adresse : <%= @product.address %></p> <!-- Ajout de l'adresse -->
         </div>
       </div>
 
@@ -33,7 +34,6 @@
         <% end %>
       </div>
     </div>
-
   </div>
 
   <div class="col-sm-6 col-md-4 align-self-center">
@@ -48,4 +48,27 @@
       <%= f.button :submit, 'Valider', class: 'btn btn-primary text-light' %>
     <% end %>
   </div>
+
+  <!-- Conteneur de la carte -->
+  <div id="map" style="height: 400px; width: 100%;"></div>
+
+  <!-- Script pour initialiser la carte -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Assurez-vous que vous avez une clé API Mapbox
+      mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+      
+      var map = new mapboxgl.Map({
+        container: 'map', // ID du conteneur
+        style: 'mapbox://styles/mapbox/streets-v11', // Style de la carte
+        center: [<%= @product.longitude %>, <%= @product.latitude %>], // Position initiale [longitude, latitude]
+        zoom: 14 // Niveau de zoom
+      });
+
+      // Ajout d'un marqueur
+      new mapboxgl.Marker()
+        .setLngLat([<%= @product.longitude %>, <%= @product.latitude %>])
+        .addTo(map);
+    });
+  </script>
 </div>
