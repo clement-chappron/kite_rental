@@ -1,32 +1,45 @@
-<div class="row d-flex">
+<div class="container">
+  <div class="row d-flex">
 
-  <div class="col-sm-6 col-md-4">
-    <div class="card rounded-4 shadow mt-3 bg-light">
-      <div class="card-body">
-        <% if @product.photo.attached? %>
-          <%= cl_image_tag @product.photo.key, class: 'card-img-top rounded-3' %>
+    <div class="col-sm-6 col-md-4">
+      <div class="card rounded-4 shadow mt-3 bg-light">
+        <div class="card-body">
+          <% if @product.photo.attached? %>
+            <%= cl_image_tag @product.photo.key, class: 'card-img-top rounded-3' %>
+          <% else %>
+            <%= image_tag @product.image, class: 'card-img-top rounded-3' %>
+          <% end %>
+          <h3 class="card-title mt-3"><%= @product.name.capitalize %></h3>
+          <p class="card-text"><%= @product.description %></p>
+          <p class="card-text">prix : <%= @product.price_per_day %>€ par jour</p>
+          <p>⭐ <%= @product.average_rating.present? ? @product.average_rating.round(2) : "Ce produit n'a pas encore de note"%></p>
+          <h4>Proprietaire</h4>
+          <p><%= @owner.name %></p>
+        </div>
+      </div>
+
+      <br>
+      <div class="mb-3">
+        <%= link_to 'Retour', products_path, class: 'btn btn-secondary'%>
+        <% if user_signed_in?%>
+          <%= link_to 'Réserver', new_user_booking_path(current_user, product_id: @product.id), class: 'btn btn-secondary' %>
         <% else %>
-          <%= image_tag @product.image, class: 'card-img-top rounded-3' %>
+          <%= link_to 'Réserver', new_user_session_path, class: 'btn btn-secondary' %>
         <% end %>
-        <h3 class="card-title mt-3"><%= @product.name.capitalize %></h3>
-        <p class="card-text"><%= @product.description %></p>
-        <p class="card-text">prix : <%= @product.price_per_day %>€ par jour</p>
-        <p>⭐ <%= @product.average_rating.present? ? @product.average_rating.round(2) : "Ce produit n'a pas encore de note"%></p>
-        <h4>Proprietaire</h4>
-        <p><%= @owner.name %></p>
+
+        <% if user_signed_in? && current_user.id == @product.user_id%>
+          <%= link_to 'Editer', edit_product_path, class: 'btn btn-primary text-light' %>
+          <%= link_to 'Supprimer', product_path(@product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-warning text-light' %>
+        <% end %>
       </div>
     </div>
 
-    <br>
-    <div class="mb-3">
-      <%= link_to 'Retour', products_path, class: 'btn btn-secondary'%>
-      <% if user_signed_in?%>
-        <%= link_to 'Réserver', new_user_booking_path(current_user, product_id: @product.id), class: 'btn btn-secondary' %>
-      <% end %>
-
-      <% if user_signed_in? && current_user.id == @product.user_id%>
-        <%= link_to 'Editer', edit_product_path, class: 'btn btn-primary text-light' %>
-        <%= link_to 'Supprimer', product_path(@product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-warning text-light' %>
+    <div class="col-sm-6 col-md-4 align-self-center">
+      <h5 class="">Ajouter un commentaires</h5>
+      <%= simple_form_for [@product, Review.new] do |f| %>
+        <%= f.input :rating, label: 'Note', collection: 1..5, as: :select %>
+        <%= f.input :content, label: 'Commentaire', input_html: { rows: 3 } %>
+        <%= f.button :submit, 'Valider', class: 'btn btn-primary text-light' %>
       <% end %>
     </div>
   </div>

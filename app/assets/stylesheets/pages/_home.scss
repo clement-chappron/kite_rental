@@ -1,2 +1,17 @@
 // Specific CSS for your home-page
 
+.banner-home {
+  max-width: 100% !important;
+  height: 70vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(https://res.cloudinary.com/deewxzlno/image/upload/v1724145606/production/kites/ya2jzmkyaszaeqsdkuoc.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-top: 22vh;
+}
+
+.banner-home h1 {
+  font-size: 3rem;
+  color: white !important;
+  font-weight: 700;
+}

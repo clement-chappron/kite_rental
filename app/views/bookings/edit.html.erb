@@ -1,6 +1,7 @@
-<h1>Modifier la réservation</h1>
+<div class="container">
+  <h1>Modifier la réservation</h1>
 
-<%= render 'form', booking: @booking %>
+  <%= render 'form', booking: @booking %>
 
 <%= link_to 'Voir la réservation', user_booking_path(@booking.user, @booking) %>
 <%# link_to 'Retour', user_booking_path(@booking.user) %>
