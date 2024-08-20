@@ -9,6 +9,7 @@ class PagesController < ApplicationController
     @user = current_user
     @products = @user.products
     @product_count = @products.count
+    @bookings = @user.bookings
   end
 
   def update_profile_picture

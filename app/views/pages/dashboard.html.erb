@@ -29,26 +29,9 @@
         </div>
         <%= form.submit "Mettre à jour le compte", class: 'btn btn-primary text-light mt-3' %>
       <% end %>
-    </div>
-      <div class="col-md-6">
-      <h2>Produits</h2>
-      <p>Vous avez <%= @products.count %> produit(s).</p>
-      <ul class="list-group">
-        <% @products.each do |product| %>
-          <li class="list-group-item">
-            <%= link_to product.name, product_path(product) %>
-            <%= link_to product_path(product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'ms-3' do  %>
-              <i class="fas fa-trash text-danger"></i>
-            <% end %>
-            <%# link_to '✖', product_path(product), method: :delete, data: { confirm: "Êtes-vous sûr(e) de vouloir supprimer ce produit ?" }, class: 'text-danger ms-3' %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12">
+      <br>
+
       <h2>Ajouter une Photo de Profil</h2>
       <%= form_with model: @user, url: update_profile_picture_path, method: :patch, local: true, html: { multipart: true } do |form| %>
         <div class="form-group">
@@ -58,5 +41,51 @@
         <%= form.submit "Mettre à jour la photo", class: 'btn btn-primary text-light mt-3' %>
       <% end %>
     </div>
+
+
+    <div class="col-md-6">
+      <h2>Mes réservations</h2>
+      <% if @bookings.empty? %>
+        <p>Vous n'avez pas de réservations.</p>
+      <% else %>
+        <ul class="list-group">
+          <% @bookings.each do |booking| %>
+            <li class="list-group-item">
+              <h5><%= booking.product.name %></h5>
+              <p>du <%= booking.start_date %> au <%= booking.end_date %></p>
+
+              <div class="d-flex align-items-center">
+                <% if booking.confirmed %>
+                  <span class="badge bg-success">Confirmée</span>
+                <% else %>
+                  <span class="badge bg-warning">En attente</span>
+                <% end %>
+                <%= link_to 'Voir', user_booking_path(current_user, booking), class: 'btn btn-primary text-light ms-3' %>
+                <%= link_to user_booking_path(current_user, booking), data: {turbo_method: :delete, turbo_confirm: "Êtes-vous sûr(e) de vouloir supprimer cette réservation ?"}, class: 'ms-auto' do %>
+                  <i class="fas fa-trash text-danger"></i>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+      <br>
+      <hr>
+      <h2>Mes produits en location</h2>
+      <p>Vous avez <%= @products.count %> produit(s).</p>
+      <ul class="list-group">
+        <% @products.each do |product| %>
+          <li class="list-group-item">
+            <div class="d-flex align-items-center my-1">
+              <h6><%= link_to product.name, product_path(product), class: 'link-offset-3 pt-2' %></h6>
+              <%= link_to product_path(product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'ms-auto' do  %>
+                <i class="fas fa-trash text-danger"></i>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
+
 </div>
