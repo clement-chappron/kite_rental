@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     #   end
     # end
   resources :users do
-    resources :bookings
+    resources :bookings do
+      get :confirm, on: :member
+    end
   end
 end

@@ -71,7 +71,7 @@
       <% end %>
       <br>
       <hr>
-      <h2>Mes produits en location</h2>
+      <h2>Mes produits</h2>
       <p>Vous avez <%= @products.count %> produit(s).</p>
       <ul class="list-group">
         <% @products.each do |product| %>
@@ -85,6 +85,35 @@
           </li>
         <% end %>
       </ul>
+
+      <hr>
+
+      <h2>Réservations de mes produits</h2>
+      <% @user_products_bookings = Booking.where(product: current_user.products) %>
+      <% if @user_products_bookings.empty? %>
+        <p>Aucune réservation n'a été effectuée sur vos produits.</p>
+      <% else %>
+        <ul class="list-group">
+          <% @user_products_bookings.each do |booking| %>
+            <li class="list-group-item">
+              <h5><%= booking.user.name %> a réservé <%= booking.product.name %></h5>
+              <p>du <%= booking.start_date.strftime("%d/%m/%Y") %> au <%= booking.end_date.strftime("%d/%m/%Y") %></p>
+
+              <div class="d-flex align-items-center">
+                <% if booking.confirmed %>
+                  <span class="badge bg-success">Confirmée</span>
+                <% else %>
+                  <span class="badge bg-warning">En attente</span>
+                <% end %>
+                <%= link_to 'Voir', user_booking_path(booking.user, booking), class: 'btn btn-primary text-light ms-3' %>
+                <% if !booking.confirmed && current_user.id == booking.product.user_id %>
+                  <%= link_to 'Confirmer', confirm_user_booking_path(booking.user, booking), method: :patch, class: 'btn btn-success ms-3' %>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
   </div>
 
