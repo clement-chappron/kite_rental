@@ -35,6 +35,7 @@
       </div>
     </div>
 
+<<<<<<< HEAD
     <div class="col-sm-6 col-md-4 align-self-center">
       <h5 class="">Ajouter un commentaire</h5>
       <%= simple_form_for [@product, Review.new] do |f| %>
@@ -43,5 +44,20 @@
         <%= f.button :submit, 'Valider', class: 'btn btn-primary text-light' %>
       <% end %>
     </div>
+=======
+  </div>
+
+  <div class="col-sm-6 col-md-4 align-self-center">
+    <%= render partial: 'bookings/form', locals: { product: @product } %>
+  </div>
+
+  <div class="col-sm-6 col-md-4 align-self-center">
+    <h5 class="">Ajouter un commentaire</h5>
+    <%= simple_form_for [@product, Review.new] do |f| %>
+      <%= f.input :rating, label: 'Note', collection: 1..5, as: :select %>
+      <%= f.input :content, label: 'Commentaire', input_html: { rows: 3 } %>
+      <%= f.button :submit, 'Valider', class: 'btn btn-primary text-light' %>
+    <% end %>
+>>>>>>> 627934880df8025693b335b50bfa3f82090b1d3c
   </div>
 </div>
