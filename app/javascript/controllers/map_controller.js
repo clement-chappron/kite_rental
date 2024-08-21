@@ -1,20 +1,27 @@
 import { Controller } from "@hotwired/stimulus"
 import mapboxgl from 'mapboxgl'
+
 // Connects to data-controller="map"
 export default class extends Controller {
   static values = {
     apiKey: String,
     markers: Array
-  }
+  };
+
   connect() {
+    console.log("Mbote na loulendo ya Stimulus ✌🏿🇨🇬");
     mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/pdunleav/cjofefl7u3j3e2sp0ylex3cyb",
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [2.3522, 48.8566],
+      zoom: 12,
     })
+
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
   }
+
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
@@ -26,6 +33,7 @@ export default class extends Controller {
         .addTo(this.map)
     })
   }
+
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
     this.markersValue.forEach(marker => bounds.extend([marker.lng, marker.lat]))

@@ -4,7 +4,7 @@
   <div class="booking-details">
     <p><strong>Date de début :</strong> <%= @booking.start_date %></p>
     <p><strong>Date de fin :</strong> <%= @booking.end_date %></p>
-    <p><strong>Produit :</strong><%= @booking.product.name %></p>
+    <p><strong>Produit : </strong><%= link_to @booking.product.name, product_path(@booking.product) %></p>
     <p><strong>Confirmation du propriétaire :</strong> <%= @booking.confirmed ? 'Confirmed' : 'Pending' %></p>
     <p><strong>Prix total :</strong> <%= (@booking.total_price) %>€</p>
   </div>

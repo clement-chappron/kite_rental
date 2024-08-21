@@ -20,7 +20,7 @@
           <tr>
             <td><%= booking.start_date %></td>
             <td><%= booking.end_date %></td>
-            <td><%= booking.product.name %></td>
+            <td><%= link_to booking.product.name, product_path(booking.product) %></td>
             <td><%= booking.confirmed ? 'Confirmed' : 'Pending' %></td>
             <td><%= (booking.total_price) %>€</td>
             <td>
