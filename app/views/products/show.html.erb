@@ -60,23 +60,35 @@
     </div>
   </div>
 
-
   <div id="map" style="height: 400px; width: 100%;"></div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('turbo:load', function() {
       mapboxgl.accessToken = '<%= ENV["MAPBOX_API_KEY"] %>';
 
       var map = new mapboxgl.Map({
-        container: 'map', // ID du conteneur
-        style: 'mapbox://styles/mapbox/streets-v11', // Style de la carte
-        center: [<%= @product.longitude %>, <%= @product.latitude %>], // Position initiale [longitude, latitude]
-        zoom: 14 // Niveau de zoom
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [<%= @product.longitude %>, <%= @product.latitude %>],
+        zoom: 14
       });
 
-      new mapboxgl.Marker()
+      new mapboxgl.Marker({ 
+        element: createMarkerElement() 
+      })
         .setLngLat([<%= @product.longitude %>, <%= @product.latitude %>])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h2><%= @product.name %></h2><p><%= @product.address %></p>'))
         .addTo(map);
     });
+
+    function createMarkerElement() {
+      var marker = document.createElement('div');
+      marker.className = 'marker';
+      marker.style.backgroundImage = 'url(<%= asset_path('green.png') %>)';
+      marker.style.backgroundSize = 'cover';
+      marker.style.width = '30px';
+      marker.style.height = '30px';
+      return marker;
+    }
   </script>
 </div>
