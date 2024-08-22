@@ -21,7 +21,7 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:rating)
+    params.require(:review).permit(:rating, :content)
   end
 
   def update_average_rating
