@@ -51,7 +51,7 @@
         <ul class="list-group">
           <% @bookings.each do |booking| %>
             <li class="list-group-item">
-              <h5><%= booking.product.name %></h5>
+              <h5><%= link_to booking.product.name, product_path(booking.product) %></h5>
               <p>du <%= booking.start_date %> au <%= booking.end_date %></p>
 
               <div class="d-flex align-items-center">

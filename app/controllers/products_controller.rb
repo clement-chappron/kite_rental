@@ -6,25 +6,14 @@ class ProductsController < ApplicationController
     @products = Product.all
 
     # Le champ d'application `geocoded` ne filtre que les produits avec des coordonnées
-<<<<<<< HEAD
-    @markers = @products.geocoded.map do |product|
-      {
-        lat: product.latitude,
-        lng: product.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: { product: product }),
-        marker_html: render_to_string(partial: "marker")
-      }
-    end
-=======
     # @markers = @products.geocoded.map do |product|
     #   {
     #     lat: product.latitude,
     #     lng: product.longitude,
-    #     info_window_html: render_to_string(partial: "info_window", locals: {product: product}),
+    #     info_window_html: render_to_string(partial: "info_window", locals: { product: product }),
     #     marker_html: render_to_string(partial: "marker")
     #   }
     # end
->>>>>>> eca04244783acde56f2542e458be34f80c8b65d3
   end
 
   def show
