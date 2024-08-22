@@ -27,11 +27,6 @@
       <br>
       <div class="mb-3">
         <%= link_to 'Retour', products_path, class: 'btn btn-secondary'%>
-        <% if user_signed_in? %>
-          <%= link_to 'Réserver', new_user_booking_path(current_user, product_id: @product.id), class: 'btn btn-secondary' %>
-        <% else %>
-          <%= link_to 'Réserver', new_user_session_path, class: 'btn btn-secondary' %>
-        <% end %>
 
         <% if user_signed_in? && current_user.id == @product.user_id %>
           <%= link_to 'Editer', edit_product_path, class: 'btn btn-primary text-light' %>
@@ -73,8 +68,8 @@
         zoom: 14
       });
 
-      new mapboxgl.Marker({ 
-        element: createMarkerElement() 
+      new mapboxgl.Marker({
+        element: createMarkerElement()
       })
         .setLngLat([<%= @product.longitude %>, <%= @product.latitude %>])
         .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h2><%= @product.name %></h2><p><%= @product.address %></p>'))
