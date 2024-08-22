@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: %i[show edit update destroy]
+  before_action :set_booking, only: %i[show edit update destroy confirm]
 
   def index
     @bookings = current_user.bookings
@@ -37,6 +37,18 @@ class BookingsController < ApplicationController
   def destroy
     @booking.destroy
     redirect_to user_bookings_path(current_user), notice: 'Booking deleted'
+  end
+
+  def confirm
+    if current_user == @booking.product.user
+      if @booking.update(confirmed: true)
+        redirect_to dashboard_path, notice: 'Réservation confirmée!'
+      else
+        redirect_to dashboard_path, alert: 'Erreur lors de la confirmation!'
+      end
+    else
+      redirect_to root_path, alert: 'Vous ne pouvez pas confirmer cette réservation!'
+    end
   end
 
   private

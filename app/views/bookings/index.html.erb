@@ -18,9 +18,15 @@
       <tbody>
         <% @bookings.each do |booking| %>
           <tr>
+<<<<<<< HEAD
             <td><%= booking.start_date %></td>
             <td><%= booking.end_date %></td>
             <td><%= link_to booking.product.name, product_path(booking.product) %></td>
+=======
+            <td><%= booking.start_date.strftime("%d/%m/%Y") %></td>
+            <td><%= booking.end_date.strftime("%d/%m/%Y") %></td>
+            <td><%= booking.product.name %></td>
+>>>>>>> eca04244783acde56f2542e458be34f80c8b65d3
             <td><%= booking.confirmed ? 'Confirmed' : 'Pending' %></td>
             <td><%= (booking.total_price) %>€</td>
             <td>

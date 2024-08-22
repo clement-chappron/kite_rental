@@ -12,7 +12,13 @@
           <h3 class="card-title mt-3"><%= @product.name.capitalize %></h3>
           <p class="card-text"><%= @product.description %></p>
           <p class="card-text">prix : <%= @product.price_per_day %>€ par jour</p>
-          <p>⭐ <%= @product.average_rating.present? ? @product.average_rating.round(2) : "Ce produit n'a pas encore de note"%></p>
+          <p>
+            <% if @product.reviews.any? %>
+              <%= @product.reviews.average(:rating).to_f %> ⭐
+            <% else %>
+              "Ce produit n'a pas encore de note"
+            <% end %>
+          </p>
           <h4>Proprietaire</h4>
           <p><%= @owner.name %></p>
           <p class="card-text">Adresse : <%= @product.address %></p> <!-- Ajout de l'adresse -->
@@ -34,6 +40,7 @@
         <% end %>
       </div>
     </div>
+<<<<<<< HEAD
 
     <div class="col-sm-6 col-md-4 align-self-center">
       <h5 class="">Ajouter un commentaire</h5>
@@ -44,10 +51,18 @@
       <% end %>
     </div>
 
+=======
+>>>>>>> eca04244783acde56f2542e458be34f80c8b65d3
   </div>
 
   <div class="col-sm-6 col-md-4 align-self-center">
-    <%= render partial: 'bookings/form', locals: { product: @product } %>
+    <h5 class="">Réserver ce produit</h5>
+    <% if user_signed_in? %>
+      <%= render partial: 'bookings/form', locals: { product: @product } %>
+    <% else %>
+      <p>Vous devez être connecté pour réserver un produit.</p>
+      <%= link_to 'Se connecter', new_user_session_path, class: 'mb-3 btn btn-primary text-light' %>
+    <% end %>
   </div>
 
   <div class="col-sm-6 col-md-4 align-self-center">
@@ -57,6 +72,7 @@
       <%= f.input :content, label: 'Commentaire', input_html: { rows: 3 } %>
       <%= f.button :submit, 'Valider', class: 'btn btn-primary text-light' %>
     <% end %>
+<<<<<<< HEAD
 
   </div>
 
@@ -64,11 +80,23 @@
   <div id="map" style="height: 400px; width: 100%;"></div>
 
   <!-- Script pour initialiser la carte -->
+=======
+  </div>
+  <!--
+   <%# Conteneur de la carte %>
+  <div id="map" style="height: 400px; width: 100%;"></div>
+
+   <%# Script pour initialiser la carte %>
+>>>>>>> eca04244783acde56f2542e458be34f80c8b65d3
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Assurez-vous que vous avez une clé API Mapbox
       mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> eca04244783acde56f2542e458be34f80c8b65d3
       var map = new mapboxgl.Map({
         container: 'map', // ID du conteneur
         style: 'mapbox://styles/mapbox/streets-v11', // Style de la carte
@@ -81,5 +109,9 @@
         .setLngLat([<%= @product.longitude %>, <%= @product.latitude %>])
         .addTo(map);
     });
+<<<<<<< HEAD
   </script>
+=======
+  </script> -->
+>>>>>>> eca04244783acde56f2542e458be34f80c8b65d3
 </div>
