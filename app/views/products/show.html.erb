@@ -60,13 +60,12 @@
     </div>
   </div>
 
-  <!-- Conteneur de la carte -->
+
   <div id="map" style="height: 400px; width: 100%;"></div>
 
-  <!-- Script pour initialiser la carte -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+      mapboxgl.accessToken = '<%= ENV["MAPBOX_API_KEY"] %>';
 
       var map = new mapboxgl.Map({
         container: 'map', // ID du conteneur
@@ -75,7 +74,6 @@
         zoom: 14 // Niveau de zoom
       });
 
-      // Ajout d'un marqueur
       new mapboxgl.Marker()
         .setLngLat([<%= @product.longitude %>, <%= @product.latitude %>])
         .addTo(map);

@@ -5,7 +5,7 @@ Geocoder.configure(
   # ip_lookup: :ipinfo_io,      # name of IP address geocoding service (symbol)
   # language: :en,              # ISO-639 language code
   use_https: true,           # use HTTPS for lookup requests? (if supported)
-  use_agent: 'rails-geocoding (eldavedibala@gmail.com)',
+  use_agent: 'KITE_RENTAL (eldavedibala@gmail.com)',
   # http_proxy: nil,            # HTTP proxy server (user:pass@host:port)
   # https_proxy: nil,           # HTTPS proxy server (user:pass@host:port)
   # api_key: nil,               # API key for geocoding service
