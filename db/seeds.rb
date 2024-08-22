@@ -45,7 +45,7 @@ product1 = Product.create!(
   name: "Aeros Comet V2",
   description: "La Comet V2 est une voile polyvalente parfaite pour les débutants. Conçue pour offrir une excellente stabilité dans diverses conditions de vent, elle permet une progression en toute sécurité et sans effort.",
   price_per_day: 30,
-  address: "123 Kite Street, Windsurf City, 00100",
+  address: "24 rue saint ferdinand, 75017 Paris, France",
   user_id: user1.id
 )
 product1.photo.attach(io: product1_img, filename: 'product1.jpg', content_type: 'image/jpg')
@@ -56,7 +56,7 @@ product2 = Product.create!(
   name: "Ozone Edge XR",
   description: "L'Edge XR d'Ozone est une voile avancée qui offre un contrôle supérieur et une performance de pointe. Idéale pour les riders expérimentés qui cherchent à repousser leurs limites.",
   price_per_day: 50,
-  address: "456 Wave Avenue, Surf Town, 00200",
+  address: "36 rue de Mulhouse, 02100 Saint Quentin, France",
   user_id: user2.id
 )
 product2.photo.attach(io: product2_img, filename: 'product2.jpg', content_type: 'image/jpg')
