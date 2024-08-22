@@ -1,6 +1,5 @@
 <div class="container">
   <div class="row d-flex">
-
     <div class="col-sm-6 col-md-4">
       <div class="card rounded-4 shadow mt-3 bg-light">
         <div class="card-body">
@@ -11,7 +10,7 @@
           <% end %>
           <h3 class="card-title mt-3"><%= @product.name.capitalize %></h3>
           <p class="card-text"><%= @product.description %></p>
-          <p class="card-text">prix : <%= @product.price_per_day %>€ par jour</p>
+          <p class="card-text">Prix : <%= @product.price_per_day %>€ par jour</p>
           <p>
             <% if @product.reviews.any? %>
               <%= @product.reviews.average(:rating).to_f %> ⭐
@@ -19,7 +18,7 @@
               "Ce produit n'a pas encore de note"
             <% end %>
           </p>
-          <h4>Proprietaire</h4>
+          <h4>Propriétaire</h4>
           <p><%= @owner.name %></p>
           <p class="card-text">Adresse : <%= @product.address %></p> <!-- Ajout de l'adresse -->
         </div>
@@ -28,59 +27,68 @@
       <br>
       <div class="mb-3">
         <%= link_to 'Retour', products_path, class: 'btn btn-secondary'%>
-        <% if user_signed_in?%>
+        <% if user_signed_in? %>
           <%= link_to 'Réserver', new_user_booking_path(current_user, product_id: @product.id), class: 'btn btn-secondary' %>
         <% else %>
           <%= link_to 'Réserver', new_user_session_path, class: 'btn btn-secondary' %>
         <% end %>
 
-        <% if user_signed_in? && current_user.id == @product.user_id%>
+        <% if user_signed_in? && current_user.id == @product.user_id %>
           <%= link_to 'Editer', edit_product_path, class: 'btn btn-primary text-light' %>
-          <%= link_to 'Supprimer', product_path(@product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'btn btn-warning text-light' %>
+          <%= link_to 'Supprimer', product_path(@product), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-warning text-light' %>
         <% end %>
       </div>
     </div>
+
+    <div class="col-sm-6 col-md-4 align-self-center">
+      <h5 class="">Réserver ce produit</h5>
+      <% if user_signed_in? %>
+        <%= render partial: 'bookings/form', locals: { product: @product } %>
+      <% else %>
+        <p>Vous devez être connecté pour réserver un produit.</p>
+        <%= link_to 'Se connecter', new_user_session_path, class: 'mb-3 btn btn-primary text-light' %>
+      <% end %>
+    </div>
+
+    <div class="col-sm-6 col-md-4 align-self-center">
+      <h5 class="">Ajouter un commentaire</h5>
+      <%= simple_form_for [@product, Review.new] do |f| %>
+        <%= f.input :rating, label: 'Note', collection: 1..5, as: :select %>
+        <%= f.input :content, label: 'Commentaire', input_html: { rows: 3 } %>
+        <%= f.button :submit, 'Valider', class: 'btn btn-primary text-light' %>
+      <% end %>
+    </div>
   </div>
 
-  <div class="col-sm-6 col-md-4 align-self-center">
-    <h5 class="">Réserver ce produit</h5>
-    <% if user_signed_in? %>
-      <%= render partial: 'bookings/form', locals: { product: @product } %>
-    <% else %>
-      <p>Vous devez être connecté pour réserver un produit.</p>
-      <%= link_to 'Se connecter', new_user_session_path, class: 'mb-3 btn btn-primary text-light' %>
-    <% end %>
-  </div>
-
-  <div class="col-sm-6 col-md-4 align-self-center">
-    <h5 class="">Ajouter un commentaire</h5>
-    <%= simple_form_for [@product, Review.new] do |f| %>
-      <%= f.input :rating, label: 'Note', collection: 1..5, as: :select %>
-      <%= f.input :content, label: 'Commentaire', input_html: { rows: 3 } %>
-      <%= f.button :submit, 'Valider', class: 'btn btn-primary text-light' %>
-    <% end %>
-  </div>
-  <!--
-   <%# Conteneur de la carte %>
   <div id="map" style="height: 400px; width: 100%;"></div>
 
-   <%# Script pour initialiser la carte %>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Assurez-vous que vous avez une clé API Mapbox
-      mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+    document.addEventListener('turbo:load', function() {
+      mapboxgl.accessToken = '<%= ENV["MAPBOX_API_KEY"] %>';
 
       var map = new mapboxgl.Map({
-        container: 'map', // ID du conteneur
-        style: 'mapbox://styles/mapbox/streets-v11', // Style de la carte
-        center: [<%= @product.longitude %>, <%= @product.latitude %>], // Position initiale [longitude, latitude]
-        zoom: 14 // Niveau de zoom
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [<%= @product.longitude %>, <%= @product.latitude %>],
+        zoom: 14
       });
 
-      // Ajout d'un marqueur
-      new mapboxgl.Marker()
+      new mapboxgl.Marker({ 
+        element: createMarkerElement() 
+      })
         .setLngLat([<%= @product.longitude %>, <%= @product.latitude %>])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h2><%= @product.name %></h2><p><%= @product.address %></p>'))
         .addTo(map);
     });
-  </script> -->
+
+    function createMarkerElement() {
+      var marker = document.createElement('div');
+      marker.className = 'marker';
+      marker.style.backgroundImage = 'url(<%= asset_path('green.png') %>)';
+      marker.style.backgroundSize = 'cover';
+      marker.style.width = '30px';
+      marker.style.height = '30px';
+      return marker;
+    }
+  </script>
 </div>
