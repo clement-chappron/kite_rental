@@ -53,8 +53,8 @@ gem "sassc-rails"
 # Authentification
 gem "devise"
 
-# Geocoder
-gem 'geocoder'
+# Gemfile pour le geocoding
+gem "geocoder"
 
 # Cloudinary
 gem "cloudinary"

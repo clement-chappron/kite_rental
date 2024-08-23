@@ -51,8 +51,8 @@
         <ul class="list-group">
           <% @bookings.each do |booking| %>
             <li class="list-group-item">
-              <h5><%= booking.product.name %></h5>
-              <p>du <%= booking.start_date %> au <%= booking.end_date %></p>
+              <h5><%= link_to booking.product.name, product_path(booking.product), class: 'no-underline' %></h5>
+              <p>du <%= booking.start_date.strftime("%d/%m/%Y") %> au <%= booking.end_date.strftime("%d/%m/%Y") %></p>
 
               <div class="d-flex align-items-center">
                 <% if booking.confirmed %>
@@ -77,7 +77,7 @@
         <% @products.each do |product| %>
           <li class="list-group-item">
             <div class="d-flex align-items-center my-1">
-              <h6><%= link_to product.name, product_path(product), class: 'link-offset-3 pt-2' %></h6>
+              <h6><%= link_to product.name, product_path(product), class: 'link-offset-3 pt-2 no-underline' %></h6>
               <%= link_to product_path(product), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: 'ms-auto' do  %>
                 <i class="fas fa-trash text-danger"></i>
               <% end %>
