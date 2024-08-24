@@ -14,10 +14,16 @@ class PagesController < ApplicationController
 
   def update_profile_picture
     @user = current_user
-    if @user.update(user_params)
-      redirect_to dashboard_path, notice: 'Photo mise à jour!'
+    if @user.update(profile_picture: params[:user][:profile_picture])
+      respond_to do |format|
+        format.html { redirect_to user_profile_path, notice: 'Photo de profil mise à jour avec succès.' }
+        format.json { render json: { profile_picture_url: @user.profile_picture.url } }
+      end
     else
-      render :dashboard
+      respond_to do |format|
+        format.html { render :profile }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Dashboard et mise à jour du profil
+  # Dashboard
   get 'dashboard', to: 'pages#dashboard'
   patch 'update_profile_picture', to: 'pages#update_profile_picture'
 
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create]
   end
 
+  #  Mise à jour du profil
+  get 'mon_profil', to: 'users#profile', as: :user_profile
 
     # User routes
     # devise_scope :user do
