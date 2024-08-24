@@ -17,13 +17,18 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params.merge(user: current_user))
 
-    if @booking.start_date > @booking.end_date
-      flash[:alert] = "La date de fin doit être après la date de début."
-      redirect_to product_path(@booking.product_id)
-    elsif @booking.save
-      redirect_to user_booking_path(current_user, @booking)
-    else
-      render :new
+    # if @booking.start_date > @booking.end_date
+    #   flash[:alert] = "La date de fin doit être après la date de début."
+    #   redirect_to product_path(@booking.product_id)
+    if @booking.start_date && @booking.end_date
+      if @booking.start_date > @booking.end_date
+        flash[:alert] = "End date must be after the start date."
+        redirect_to product_path(@booking.product_id)
+      elsif @booking.save
+        redirect_to user_booking_path(current_user, @booking)
+      else
+        render :new
+      end
     end
   end
 
@@ -32,10 +37,15 @@ class BookingsController < ApplicationController
   end
 
   def update
-    if @booking.update(booking_params)
-      redirect_to user_booking_path(current_user, @booking), notice: 'Réservation mise à jour'
-    else
-      render :edit
+    if @booking.start_date && @booking.end_date
+      if @booking.start_date > @booking.end_date
+        flash[:alert] = "La date de fin doit être après la date de début."
+        redirect_to edit_user_booking_path(@booking.user, @booking)
+      elsif @booking.update(booking_params)
+        redirect_to user_booking_path(current_user, @booking), notice: 'Réservation mise à jour'
+      else
+        render :edit
+      end
     end
   end
 
