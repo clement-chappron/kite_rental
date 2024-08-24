@@ -5,45 +5,6 @@
 
   <div class="row mb-4">
     <div class="col-md-6">
-      <h2>Informations de Compte</h2>
-      <%= form_with model: @user, url: user_registration_path, method: :put, local: true do |form| %>
-        <div class="form-group">
-          <%= form.label :name, "Nom" %>
-          <%= form.text_field :name, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= form.label :email, "Email" %>
-          <%= form.email_field :email, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= form.label :current_password, "Mot de passe actuel" %>
-          <%= form.password_field :current_password, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= form.label :password, "Nouveau mot de passe" %>
-          <%= form.password_field :password, class: 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= form.label :password_confirmation, "Confirmation du mot de passe" %>
-          <%= form.password_field :password_confirmation, class: 'form-control' %>
-        </div>
-        <%= form.submit "Mettre à jour le compte", class: 'btn btn-primary text-light mt-3' %>
-      <% end %>
-
-      <br>
-
-      <h2>Ajouter une Photo de Profil</h2>
-      <%= form_with model: @user, url: update_profile_picture_path, method: :patch, local: true, html: { multipart: true } do |form| %>
-        <div class="form-group">
-          <%= form.label :profile_picture, "Photo de profil" %>
-          <%= form.file_field :profile_picture, class: 'form-control' %>
-        </div>
-        <%= form.submit "Mettre à jour la photo", class: 'btn btn-primary text-light mt-3' %>
-      <% end %>
-    </div>
-
-
-    <div class="col-md-6">
       <h2>Mes réservations</h2>
       <% if @bookings.empty? %>
         <p>Vous n'avez pas de réservations.</p>

@@ -64,6 +64,7 @@
       var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
+        // style: "mapbox://styles/mapbox/satellite-streets-v12",
         center: [<%= @product.longitude %>, <%= @product.latitude %>],
         zoom: 14
       });
