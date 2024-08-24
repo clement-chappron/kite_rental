@@ -26,8 +26,7 @@
 
       <br>
       <div class="mb-3">
-        <%= link_to 'Retour', products_path, class: 'btn btn-secondary'%>
-
+        <%= link_to 'Retour', products_path, class: 'btn btn-secondary' %>
         <% if user_signed_in? && current_user.id == @product.user_id %>
           <%= link_to 'Editer', edit_product_path, class: 'btn btn-primary text-light' %>
           <%= link_to 'Supprimer', product_path(@product), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-warning text-light' %>
@@ -64,27 +63,18 @@
       var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
-        // style: "mapbox://styles/mapbox/satellite-streets-v12",
+      // style: "mapbox://styles/mapbox/satellite-streets-v12",
         center: [<%= @product.longitude %>, <%= @product.latitude %>],
         zoom: 14
       });
 
       new mapboxgl.Marker({
-        element: createMarkerElement()
+        color: 'rgba(2, 115, 115, 1)',
+        scale: 1
       })
         .setLngLat([<%= @product.longitude %>, <%= @product.latitude %>])
         .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h2><%= @product.name %></h2><p><%= @product.address %></p>'))
         .addTo(map);
     });
-
-    function createMarkerElement() {
-      var marker = document.createElement('div');
-      marker.className = 'marker';
-      marker.style.backgroundImage = 'url(<%= asset_path('green.png') %>)';
-      marker.style.backgroundSize = 'cover';
-      marker.style.width = '30px';
-      marker.style.height = '30px';
-      return marker;
-    }
   </script>
 </div>
