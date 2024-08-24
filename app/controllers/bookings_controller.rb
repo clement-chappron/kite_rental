@@ -17,19 +17,23 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params.merge(user: current_user))
 
-    if @booking.save
+    if @booking.start_date > @booking.end_date
+      flash[:alert] = "La date de fin doit être après la date de début."
+      redirect_to product_path(@booking.product_id)
+    elsif @booking.save
       redirect_to user_booking_path(current_user, @booking)
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
   def edit
+    @product = @booking.product
   end
 
   def update
     if @booking.update(booking_params)
-      redirect_to user_booking_path(current_user, @booking), notice: 'Booking updated'
+      redirect_to user_booking_path(current_user, @booking), notice: 'Réservation mise à jour'
     else
       render :edit
     end
@@ -37,7 +41,7 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking.destroy
-    redirect_to user_bookings_path(current_user), notice: 'Booking deleted'
+    redirect_to user_bookings_path(current_user), notice: 'Réservation annulée'
   end
 
   def confirm

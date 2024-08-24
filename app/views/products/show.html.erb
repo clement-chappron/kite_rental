@@ -6,7 +6,7 @@
           <% if @product.photo.attached? %>
             <%= cl_image_tag @product.photo.key, class: 'card-img-top rounded-3' %>
           <% else %>
-            <%= image_tag @product.image, class: 'card-img-top rounded-3' %>
+            <%= image_tag app/assets/images/kite.jpeg, class: 'card-img-top rounded-3' %>
           <% end %>
           <h3 class="card-title mt-3"><%= @product.name.capitalize %></h3>
           <p class="card-text"><%= @product.description %></p>

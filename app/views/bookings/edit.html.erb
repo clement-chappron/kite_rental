@@ -1,7 +1,18 @@
-<div class="container">
-  <h1>Modifier la réservation</h1>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 mt-3">
+      <% if @product.photo.attached? %>
+        <%= cl_image_tag @product.photo.key, class: 'card-img-top rounded-3 img-fluid' %>
+      <% else %>
+        <%= image_tag app/assets/images/kite.jpeg, class: 'card-img-top rounded-3 img-fluid' %>
+      <% end %>
+    </div>
 
-  <%= render 'form', booking: @booking %>
+    <div class="col-md-6 mt-3">
+      <h1>Modifier la réservation</h1>
 
-<%= link_to 'Voir la réservation', user_booking_path(@booking.user, @booking) %>
-<%# link_to 'Retour', user_booking_path(@booking.user) %>
+      <%= render 'form', booking: @booking %>
+      <%# link_to 'Voir la réservation', user_booking_path(@booking.user, @booking) %>
+    </div>
+  </div>
+</div>
