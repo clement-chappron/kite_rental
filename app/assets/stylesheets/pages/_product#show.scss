@@ -2,3 +2,9 @@
   width: auto;
   height: 100%;
 }
+
+.sticky-card {
+  position: sticky;
+  top: 20px; /* Distance from the top of the viewport */
+  z-index: 100; /* Optional: ensures it stays above other content */
+}

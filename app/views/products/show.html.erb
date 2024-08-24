@@ -2,16 +2,16 @@
   <div>
     <h1 class="mt-4 pb-2 fs-3"><%= @product.name.capitalize %></h1>
   </div>
-  <div class="d-flex rounded-" style='max-height: calc(60vh - 64px); width: 100%;'>
-    <div style="width: 60%;">
-      <% if @product.photo.attached? %>
-        <%= cl_image_tag(@product.photo.key, class: 'img-kite rounded-5') %>
-      <% end %>
-    </div>
-  </div>
 
   <div class="row d-flex">
     <div class="col-sm-7">
+      <div class="d-flex rounded-" style='max-height: calc(60vh - 64px); width: 100%;'>
+        <div style="width: 60%;">
+          <% if @product.photo.attached? %>
+            <%= cl_image_tag(@product.photo.key, class: 'img-kite rounded-5') %>
+          <% end %>
+        </div>
+      </div>
       <div>
         <h2 class="fs-5 mt-4">Aile de kite surf <%= @product.address %></h2>
       </div>
@@ -59,20 +59,12 @@
           </div>
         </div>
 
-        <hr>
-
-          <h5 class="">Ajouter un commentaire</h5>
-          <%= simple_form_for [@product, Review.new] do |f| %>
-            <%= f.input :rating, label: 'Note', collection: 1..5, as: :select %>
-            <%= f.input :content, label: 'Commentaire', input_html: { rows: 3 } %>
-            <%= f.button :submit, 'Valider', class: 'btn btn-primary text-light' %>
-          <% end %>
     </div>
 
     <%# RESERVATION  %>
 
-      <div class="col-sm-4 mt-4">
-        <div class="card rounded-4 bg-secondary p-4 text-center mx-auto" style="max-width: 350px; height: 450px;">
+      <div class="col-sm-4">
+        <div class="card rounded-4 bg-secondary p-4 text-center mx-auto sticky-card" style="max-width: 350px; height: 450px;">
           <h5 class="mt-5 mb-3 text-light">Réserver ce produit : </h5>
           <p class="text-light"><%= @product.name.capitalize %></p>
           <% if user_signed_in? %>
@@ -110,6 +102,7 @@
   </script>
 
 
+
   <div class="row my-3 g-3">
     <% @product.reviews.each do |review| %>
       <div class="card p-2 col-6 mx-3 rounded-4 shadow" style="width: 30%;">
@@ -125,4 +118,12 @@
     <% end %>
   </div>
 
+  <div class="my-4 col-sm-6 mx-auto">
+    <h5 class="">Ajouter un commentaire</h5>
+    <%= simple_form_for [@product, Review.new] do |f| %>
+      <%= f.input :rating, label: 'Note', collection: 1..5, as: :select %>
+      <%= f.input :content, label: 'Commentaire', input_html: { rows: 3 } %>
+      <%= f.button :submit, 'Valider', class: 'btn btn-primary text-light' %>
+    <% end %>
+  </div>
 </div>
