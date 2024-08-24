@@ -11,7 +11,7 @@
             <% if product.photo.attached? %>
               <%= cl_image_tag product.photo.key, class: 'card-img-top rounded-3' %>
             <% else %>
-              <%= image_tag product.image, class: 'card-img-top rounded-3' %>
+              <%= image_tag app/assets/images/kite.jpeg, class: 'card-img-top rounded-3' %>
             <% end %>
             <h3 class="card-title mt-3 d-inline-block text-truncate" style="max-width: 300px;"><%= product.name.capitalize %></h3>
             <p class="cart-text d-inline-block text-truncate" style="max-width: 300px;"><%= product.description %></p>
@@ -24,7 +24,7 @@
                 "Ce produit n'a pas encore de note"
               <% end %>
             </p>
-            
+
             <%= link_to 'Voir ce produit', product_path(product.id), class: 'btn btn-primary mt-auto text-light' %>
           </div>
         </div>

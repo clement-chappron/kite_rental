@@ -4,7 +4,7 @@
       <% if @product.photo.attached? %>
         <%= cl_image_tag @product.photo.key, class: 'card-img-top rounded-3 img-fluid' %>
       <% else %>
-        <%= image_tag @product.image, class: 'card-img-top rounded-3 img-fluid' %>
+        <%= image_tag app/assets/images/kite.jpeg, class: 'card-img-top rounded-3 img-fluid' %>
       <% end %>
     </div>
 
