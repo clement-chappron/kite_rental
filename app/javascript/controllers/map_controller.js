@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import mapboxgl from 'mapbox-gl' // Don't forget this!
+import mapboxgl from 'mapbox-gl'
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
 
 export default class extends Controller {
@@ -14,11 +14,10 @@ export default class extends Controller {
     this.map = new mapboxgl.Map({
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10"
-      // style: "mapbox://styles/mapbox/satellite-streets-v12"
     })
-    this.#addMarkersToMap();
-    
-    this.#fitMapToMarkers();
+
+    this.#addMarkersToMap()
+    this.#fitMapToMarkers()
 
     this.map.addControl(
       new MapboxGeocoder({ 
@@ -30,16 +29,21 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
-  
-      // Create a HTML element for your custom marker
-      const customMarker = document.createElement("div")
-      customMarker.innerHTML = marker.marker_html
-  
-      // Pass the element as an argument to the new marker
-      new mapboxgl.Marker(customMarker)
+      const popupContent = `
+        <div style="text-align: center;">
+          <h3>
+            <a href="/products/${marker.id}" class="custom-popup-link">${marker.name || 'Nom inconnu'}</a>
+          </h3>
+          <h4 class="text-dark">€ ${marker.price_per_day || 'Non communiqué' }</h4>
+          <h5 class="text-dark">${marker.address || 'Adresse inconnue'}</h5>
+        </div>
+      `
+
+      new mapboxgl.Marker({
+        color: 'rgba(2, 115, 115, 1)',
+      })
         .setLngLat([marker.lng, marker.lat])
-        .setPopup(popup)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(popupContent))
         .addTo(this.map)
     })
   }
