@@ -2,30 +2,28 @@
   <div class="mt-5 mb-4">
     <h1>Tous les produits</h1>
   </div>
-  <div class ="mb-4"style="width: 100%; height: 600px;"
-    data-controller="map"
-    data-map-markers-value="<%= @markers.to_json %>"
-    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
 
- <div class="row row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-md-2 g-lg-4">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
     <% @products.each do |product| %>
-    <div class="col">
-        <div class="card rounded-4 shadow bg-light">
-          <div class="card-body d-flex flex-column" style="height: 520px;">
-            <% if product.photo.attached? %>
-              <%= cl_image_tag product.photo.key, class: 'card-img-top rounded-3' %>
-            <% else %>
-              <%= image_tag app/assets/images/kite.jpeg, class: 'card-img-top rounded-3' %>
-            <% end %>
+      <div class="col">
+        <div class="card rounded-4 shadow bg-light h-100">
+          <% if product.photo.attached? %>
+            <%= cl_image_tag product.photo.key, class: 'card-img-top rounded-3' %>
+          <% else %>
+            <%= image_tag 'kite.jpeg', class: 'card-img-top rounded-3' %>
+          <% end %>
+
+          <div class="card-body d-flex flex-column">
             <h3 class="card-title mt-3"><%= product.name.capitalize %></h3>
-            <p class="cart-text d-inline-block text-truncate" style="max-width: 300px;"><%= product.description %></p>
-            <p class="cart-text">Prix : <%= product.price_per_day %>€ par jour</p>
+            <p class="card-text text-truncate" style="max-width: 100%;">
+              <%= product.description %>
+            </p>
+            <p class="card-text">Prix : <%= product.price_per_day %>€ par jour</p>
             <p>
               <% if product.reviews.any? %>
                 <%= product.reviews.average(:rating).to_f %> ⭐
               <% else %>
-                "Ce produit n'a pas encore de note"
+                Ce produit n'a pas encore de note
               <% end %>
             </p>
             <%= link_to 'Voir ce produit', product_path(product.id), class: 'btn btn-primary mt-auto text-light' %>
@@ -35,5 +33,9 @@
     <% end %>
   </div>
 
-
+  <div class="mt-5" style="width: 100%; height: 600px;"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
 </div>

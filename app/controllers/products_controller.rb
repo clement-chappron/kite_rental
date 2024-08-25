@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
       {
         id: product.id,
         name: product.name,
-        price_per_day: 50,
+        price_per_day: product.price_per_day,
         address: product.address,
         lat: product.latitude,
         lng: product.longitude,
